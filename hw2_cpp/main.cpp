@@ -1,5 +1,8 @@
 #include <igl/eigs.h>
 #include <igl/opengl/glfw/Viewer.h>
+#include <igl/opengl/glfw/imgui/ImGuiPlugin.h>
+#include <igl/opengl/glfw/imgui/ImGuiMenu.h>
+#include <igl/opengl/glfw/imgui/ImGuiHelpers.h>
 #include <igl/read_triangle_mesh.h>
 #include <Eigen/Sparse>
 #include <iostream>
@@ -43,6 +46,11 @@ int main(int argc, char * argv[])
     eigenvectors = V.block(0,0,V.rows(), 3);
 
     igl::opengl::glfw::Viewer viewer;
+    igl::opengl::glfw::imgui::ImGuiPlugin plugin;
+    viewer.plugins.push_back(&plugin);
+    igl::opengl::glfw::imgui::ImGuiMenu menu;
+    plugin.widgets.push_back(&menu);
+    
     viewer.data().set_mesh(V,F);
     viewer.callback_key_down = &key_down; // setting the callback
     viewer.data().show_lines = true;

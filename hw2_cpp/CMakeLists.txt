@@ -8,6 +8,8 @@ include(libigl)
 
 # Enable the target igl::glfw
 igl_include(glfw)
+igl_include(imgui)
+
 
 set(
         main_src
@@ -16,4 +18,4 @@ set(
 
 # Add your project files
 add_executable(${PROJECT_NAME} ${main_src})
-target_link_libraries(${PROJECT_NAME} PUBLIC igl::glfw)
+target_link_libraries(${PROJECT_NAME} PUBLIC igl::glfw igl::imgui)
